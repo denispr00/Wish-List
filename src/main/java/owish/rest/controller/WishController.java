@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import owish.core.service.wish.WishService;
 import owish.model.wish.Wish;
+import owish.model.wish.Wishes;
 
 @RestController
 @RequestMapping("/wish")
@@ -22,9 +23,14 @@ public class WishController {
 	@Autowired
 	SimpMessagingTemplate template;
 
-	@RequestMapping(method = RequestMethod.GET)
+	/*@RequestMapping(method = RequestMethod.GET)
 	public List<Wish> retrieveList() {
 		return wishService.retrieveList();
+	}*/
+
+	@RequestMapping(path = "retrieve", method = RequestMethod.GET)
+	public List<Wishes> retrieveListElastic() {
+		return wishService.retrieveWishElastic();
 	}
 
 	@RequestMapping(path = "completewish", method = RequestMethod.PUT)

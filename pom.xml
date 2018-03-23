@@ -64,7 +64,7 @@
 
         
 
-        <!-- <dependency>
+<!--         <dependency>
 
     		<groupId>org.hibernate</groupId>
 
@@ -108,10 +108,10 @@
 		    <version>1.0.2</version>
 		</dependency>
 		
-		<!-- <dependency>
+		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-        </dependency> -->
+        </dependency>
         
         <dependency>
             <groupId>org.springframework.boot</groupId>

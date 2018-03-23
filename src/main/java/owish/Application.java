@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 //import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 //@SpringBootApplication(scanBasePackages = {"owish.rest", "owish.core"})
@@ -12,6 +13,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 // @ImportResource("classpath:core-spring.xml")
 // @ContextConfiguration("classpath:core-spring.xml")
 // @EnableJpaRepositories(basePackages = {"owish.core.dao"})
+@EnableElasticsearchRepositories(basePackages = "owish.core.repository")
 public class Application extends SpringBootServletInitializer {
 
 	@Override

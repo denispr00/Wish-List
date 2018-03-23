@@ -2,14 +2,19 @@ package owish.core.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import owish.core.dao.wish.WishDao;
+import owish.core.repository.WishesRepository;
 import owish.core.service.wish.WishService;
 import owish.model.wish.Wish;
+import owish.model.wish.Wishes;
 import owish.rest.security.JwtUser;
 
 @Service
@@ -18,8 +23,9 @@ public class WishServiceImpl extends AbstractCrudServiceImpl<Wish> implements Wi
 	@Autowired
 	WishDao wishDao;
 
-	/*@Autowired
-	WishRepository wishRepository;*/
+	// elastic search
+	@Autowired
+	WishesRepository wishesRepository;
 
 	@Override
 	// public AbstractDao<Wish> getDao() {
@@ -62,8 +68,28 @@ public class WishServiceImpl extends AbstractCrudServiceImpl<Wish> implements Wi
 		String username = user.getUsername(); // get logged in username
 		wish.setCreationUser(username);
 
-		// return wishDao.findOne(Integer.toUnsignedLong(newWish.getId()));
+		//ELASTIC SEARCH ADD
+		Wishes wishes = new Wishes();
+		wishes.setTitle(title);
+		wishes.setActive("Y");
+
+		addWishElastic(wishes);
+		
 		return wishDao.save(wish);
+	}
+
+
+	@Override
+	public List<Wishes> retrieveWishElastic() {
+		Iterable<Wishes> wishesIterable = wishesRepository.findAll();
+		List<Wishes> wishes = StreamSupport.stream(wishesIterable.spliterator(), false)
+				.collect(Collectors.toList());
+		return wishes;
+	}
+
+	@Override
+	public Wishes addWishElastic(Wishes wish) {
+		return wishesRepository.save(wish);
 	}
 
 }

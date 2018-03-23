@@ -18,7 +18,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "wish")
 @EntityListeners(AuditingEntityListener.class)
-// @Document(indexName = "owish", type = "wish")
 // public class Wish extends BaseEntity {
 public class Wish {
 
@@ -52,6 +51,20 @@ public class Wish {
 
 	public Wish() {
 		super();
+	}
+
+	public Wish(int id, String title, String description, String completedDate, String completedUser,
+			String creationUser, Date creationDate, String updateUser, Date updateDate) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.completedDate = completedDate;
+		this.completedUser = completedUser;
+		this.creationUser = creationUser;
+		this.creationDate = creationDate;
+		this.updateUser = updateUser;
+		this.updateDate = updateDate;
 	}
 
 	public int getId() {
